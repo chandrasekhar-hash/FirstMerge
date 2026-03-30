@@ -1,0 +1,53 @@
+ <!-- what exists on the page -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FirstMerge</title>
+
+    <!-- link with all css files -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+
+ </head>
+ <body>
+                     <!-- Header - Top bar  -->
+        <header class = "header">
+            <div class = "header-inner">
+                <span class = "logo">FirstMerge</span>
+            </div>
+        </header>
+
+        <!-- page layout -->
+         <div class="container">
+
+            <!-- Left side bar -->
+            <aside class = "sidebar">
+                <p class = "sidebar-label">Sort By</p>
+                <div id="sort-controls"></div>
+
+                <p class = "sidebar-label">Language</p>
+                <div id="language-filters"></div>
+            </aside>
+
+            <!-- Right Side -->
+            <main class="main">
+                <input 
+                type="text"
+                id = "search-input"
+                placeholder="search issues or repos..."
+                />
+
+                <div id="issue-feed"></div>
+            </main>
+         </div>
+
+         <script src="js/api.js"></script>
+         <script src="js/app.js"></script>
+
+ </body>
+ </html>

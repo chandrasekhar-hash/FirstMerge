@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+}
+
+.sidebar{
+    width: 250px;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+}
+
+.main{
+    flex: 1;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+}

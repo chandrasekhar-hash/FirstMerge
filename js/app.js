@@ -1,57 +1,105 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Inputs for API
+  const language = "JavaScript"; 
+  const label = "good first issue";
 
-    // inputs 
-    let language = "JavaScript";
-    let label = "good first issue";   // git hub label
+  // Connect to HTML
+  const feed = document.getElementById("issue-feed");
+  const searchInput = document.getElementById("search-input");
 
-    let feed = document.getElementById("issue-feed");
+  const filterZero = document.getElementById("filter-zero");
+  const filterAll = document.getElementById("filter-all");
+  const sortComments = document.getElementById("sort-comments");
 
-    async function loadIssues(){
-        
-        feed.innerHTML = "Loading issues..";
+  // all global data store
+  let allIssues = [];
 
-        
-        let issues = await fetchIssues(language,label)
+  // fetch data
+  async function loadIssues() {
 
-        if (issues == null) {
-            feed.innerHTML = "No issues found 😢";
-            return;
-        }
+    feed.textContent = "Loading issues...";
 
-        if(issues.length === 0){
-            feed.innerHTML = "No issues found 😢";
-            return
-        }
+    let issues = await fetchIssues(language, label);
 
-        feed.innerHTML = "";
-
-        for (let i = 0; i < issues.length; i++) {
-            let issue = issues[i];
-            let card = document.createElement("div");
-            card.className = "issue-card";
-            let title = document.createElement("h3");
-            title.textContent = issue.title;
-            let comments = document.createElement("p")
-            comments.textContent = "Comments: " + issue.comments;
-
-            let link = document.createElement("a");
-            link.href = issue.html_url;
-            link.target = "_blank";
-            link.textContent = "View Issue";
-
-            card.appendChild(title);
-            card.appendChild(comments);
-            card.appendChild(link);
-            
-            feed.appendChild(card);
-
-
-
-        }
+    if (!issues || issues.length === 0) {
+      feed.textContent = "No issues found ";
+      return;
     }
-    loadIssues();
 
+    allIssues = issues;   // store data
 
+    renderIssues(allIssues);  // show data
+  }
 
+  // Render funciton to show dat on screen 
+  function renderIssues(issues) {if (issues.length === 0) {
+  feed.textContent = "No matching results 😢";
+  return;
+}
+
+    feed.innerHTML = "";
+
+    issues.map(function (issue) {
+
+      let card = document.createElement("div");
+      card.className = "issue-card";
+
+      let title = document.createElement("h3");
+      title.textContent = issue.title;
+
+      let comments = document.createElement("p");
+      comments.textContent = "Comments: " + issue.comments;
+
+      let link = document.createElement("a");
+      link.href = issue.html_url;
+      link.target = "_blank";
+      link.textContent = "View Issue";
+
+      card.appendChild(title);
+      card.appendChild(comments);
+      card.appendChild(link);
+
+      feed.appendChild(card);
+    });
+  }
+
+  // Search function usinf filter 
+searchInput.addEventListener("input", function () {
+  let value = searchInput.value.toLowerCase();
+  let filteredIssues = allIssues.filter(function (issue) {
+    let title = issue.title.toLowerCase();
+    let repo = issue.repository_url.toLowerCase();
+    return title.includes(value) || repo.includes(value);
+  });
+
+  renderIssues(filteredIssues);
+
+});
+
+  // Filter 
+  filterZero.addEventListener("click", function () {
+
+    let filtered = allIssues.filter(function (issue) {
+      return issue.comments === 0;
+    });
+
+    renderIssues(filtered);
+  });
+  //Reset Filter
+  filterAll.addEventListener("click", function () {
+    renderIssues(allIssues);
+  });
+  //Sort by comments
+   sortComments.addEventListener("click", function () {
+
+    let sorted = allIssues.slice();
+
+    sorted.sort(function (a, b) {
+      return b.comments - a.comments;
+    });
+
+    renderIssues(sorted);
+  });
+  loadIssues();
 
 });

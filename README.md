@@ -1,131 +1,102 @@
 # FirstMerge 🔀
 
-A web app that helps developers find open source 
-issues on GitHub that actually match their skill level.
+A simple web app that helps developers find beginner-friendly open source issues on GitHub based on their skill level.
 
 ---
 
 ## The Problem
 
-If you've ever tried to contribute to open source,
-you know how it goes. You search "good first issue"
-on GitHub, get hundreds of results, spend 20 minutes
-reading through them, and close the tab without doing
-anything. Most issues are either too hard, in a language
-you don't know, or the repo hasn't been touched in years.
+If you've ever tried contributing to open source, you probably faced this:
 
-There's no tool that filters issues based on *who you are*
-as a developer. FirstMerge is that tool.
+You search *"good first issue"* on GitHub, open a few links, get confused, and then give up.
+
+Most issues:
+- are too hard  
+- use languages you don’t know  
+- or belong to inactive projects  
+
+There’s no simple way to find issues that actually match your level.
+
+**That’s why I built FirstMerge.**
 
 ---
 
 ## What It Does
 
-You tell the app your programming languages, your
-experience level, and how much time you have per week.
-It then pulls real issues from GitHub and shows you
-only the ones that make sense for you — sorted, scored,
-and flagged if they're stale or too complex.
+FirstMerge makes it easier to explore open source issues in a clean and simple way.
 
-You can bookmark issues you like, mark ones you've
-worked on, and the app remembers your saved repos so
-every time you come back there's something new waiting
-from a codebase you already know.
+- It fetches real-time issues from GitHub  
+- Shows only beginner-friendly issues  
+- Helps you understand difficulty based on activity (comments)  
+- Lets you search and filter easily  
+- You can bookmark issues to come back later  
+
+It also has a modern UI with a video background and glass-style cards to make the experience feel smooth and engaging.
 
 ---
 
 ## API Used
 
-| API | Category | Purpose |
-|-----|----------|---------|
-| [GitHub REST API](https://docs.github.com/en/rest) | Development | Fetch live issues and repo data from GitHub |
+| API | Purpose |
+|-----|--------|
+| GitHub REST API | Fetches live issues using `/search/issues` |
 
 ---
 
 ## Features
 
-**Core**
-- Profile setup — pick your languages, level, and time
-- Live issue feed from GitHub
-- Search by keyword
-- Filter by language and issue label
-- Sort by newest, most stars, least competition
+### 🔹 Core Features
+- Live issue feed from GitHub  
+- Search issues by keyword  
+- Bookmark issues using local storage  
+- Clean and simple UI  
 
-**Smart**
-- Difficulty tag on each issue (Beginner / Intermediate / Advanced)
-- Repo health score so you avoid dead projects
-- Stale issue warning if nothing has moved in 60+ days
-
-**Journey**
-- Bookmark issues you want to work on
-- Mark issues as contributed to track your progress
-- Repo watchlist — come back and see new issues from repos you know
-- README snippet generator for your portfolio
+### 🔹 Smart Features
+- Language selection (JavaScript, Python, HTML, CSS, TypeScript, etc.)  
+- Difficulty levels based on comments:
+  - Beginner → 0–5 comments  
+  - Intermediate → 6–10 comments  
+  - Advanced → 10+ comments  
 
 ---
 
 ## Tech Stack
 
-| | |
-|---|---|
+| Technology | Use |
+|-----------|-----|
 | HTML | Structure |
-| CSS | Styling |
-| JavaScript | Logic, API calls, data storage |
-| React | UI components |
+| CSS | Styling (glassmorphism, layout) |
+| JavaScript | Logic, API calls, filtering, local storage |
 
 ---
 
 ## Project Structure
-```
-firstmerge/
+merge/
 ├── index.html
+├── backgroundUi.mp4
 ├── css/
-│   ├── reset.css
-│   ├── variables.css
-│   ├── typography.css
-│   ├── layout.css
-│   ├── components.css
-│   ├── modal.css
-│   ├── drawer.css
-│   └── animations.css
-├── js/
-│   ├── api.js
-│   ├── storage.js
-│   ├── filters.js
-│   ├── scoring.js
-│   └── app.js
-└── components/
-    ├── header.js
-    ├── sidebar.js
-    ├── searchBar.js
-    ├── issueFeed.js
-    ├── issueCard.js
-    ├── issueDrawer.js
-    ├── profileModal.js
-    └── snippetBox.js
-```
+│ ├── reset.css
+│ ├── variables.css
+│ ├── layout.css
+│ └── components.css
+└── js/
+├── api.js
+├── storage.js
+└── app.js
+
 
 ---
 
 ## How To Run
-```bash
-git clone https://github.com/YOUR_USERNAME/firstmerge.git
-cd firstmerge
-```
 
-Then just open `index.html` in your browser or use
-Live Server in VS Code. No installs. No setup. Nothing.
+Just open `index.html` in your browser.
 
-If you want more API requests, add a free GitHub
-Personal Access Token in the profile modal.
-Without it you get 60 requests/hr which is fine for testing.
+No installation, no setup — everything runs directly in the browser using vanilla JavaScript.
 
 ---
 
-## What's Next
+## Final Note
 
-- GitHub login to auto-detect merged PRs
-- Public portfolio page per developer
-- GitLab support
-- Email digest for watchlist updates
+This project was built to solve a real beginner problem — making open source contributions easier to start.
 
+It focuses on simplicity, clarity, and real usability instead of complexity.
